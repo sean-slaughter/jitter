@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
 
   def create_with_google
     auth = request.env["omniauth.auth"]["info"]
-    user = User.find_or_create_by(email: auth["email"]) o |u|
+    user = User.find_or_create_by(email: auth["email"]) do |u|
       u.name = auth["name"]
       u.password = SecureRandom.hexd
     end
